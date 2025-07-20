@@ -5,6 +5,9 @@ import MenuItemCard from '@/components/MenuItemCard'
 import CategoryTabs from '@/components/CategoryTabs'
 import SubMenuTabs from '@/components/SubMenuTabs'
 import Image from 'next/image'
+import { useUser } from '@/contexts/UserContext'
+import { useRouter } from 'next/navigation'
+import { CgLogOut } from 'react-icons/cg';
 
 type PageProps = {
     params: Promise<{
@@ -14,14 +17,16 @@ type PageProps = {
 }
 
 function MenuPage({ params }: PageProps) {
+    const { user, logout } = useUser()
+    const router = useRouter()
     const { category } = use(params)
-    console.log("cateogory:", category);
+    // console.log("cateogory:", category)
 
     const decodedCategory = decodeURI(category || '')
-    console.log("decoded.category:", decodedCategory)
+    // console.log("decoded.category:", decodedCategory)
 
     const subMenus = menuData[decodedCategory] ? Object.keys(menuData[decodedCategory]) : []
-    console.log("submenus:", subMenus)
+    // console.log("submenus:", subMenus)
 
     const [activeTab, setActiveTab] = useState(subMenus[0] || "")
     const [search, setSearch] = useState("")
@@ -54,16 +59,28 @@ function MenuPage({ params }: PageProps) {
         setActiveTab(subMenus[0] || "")
     }
 
+    const handleLogout = () => {
+        logout()
+        router.push('/login')
+    }
 
     return (
-        <div className='min-h-screen bg-gray-100'>
+        <div className='min-h-screen bg-gray-100 relative' >
             <div className='bg-white shadow p-4 text-xl font-bold items-center'>
-                Welcome to Groot
+                Welcome to Groot, {user?.name}
+                <button
+                    onClick={() => handleLogout()}
+                    className='absolute top-4 right-4 bg-red-400 text-white px-4 py-2 rounded-md hover:bg-red-700 text-md '
+                >
+                    <CgLogOut />
+                </button>
+
             </div>
 
 
+
             <div className='relative w-full h-auto mt-4 px-4'>
-                <div className='relative w-full aspect-[16/9] md:aspect-[4/1] overflow-hidden rounded-lg shadow-md'>
+                <div className='relative w-full aspect-[3/2] md:aspect-[4/1] overflow-hidden rounded-lg shadow-md'>
                     <Image
                         src='/login.jpg'
                         alt='Image'
@@ -76,7 +93,13 @@ function MenuPage({ params }: PageProps) {
             </div>
 
 
-            <div className='p-1 text-center text-gray-600 font-semibold'>Table No : 1 </div>
+            <div className='p-1 text-center text-gray-600 font-semibold'>
+                {user?.tableNumber && (
+                    <p className='mt-2 text-gray-400'>
+                        🪑Table Number : {user.tableNumber}
+                    </p>
+                )}
+            </div>
 
 
             <div className='flex flex-col md:flex-row items-center p-4 gap-3'>
