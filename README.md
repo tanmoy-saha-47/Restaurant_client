@@ -18,6 +18,10 @@ Dynamic Content: Menu data is loaded from a local data file (menuData.ts), makin
 
 Promotional Image Display: Features a dedicated section for displaying promotional images or offers.
 
+Login Functionality: Stores the login credentials in UserContext
+
+Table Selection : User can select their table and the tableNumber is stored in UserContext
+
 
 ## Getting Started
 
