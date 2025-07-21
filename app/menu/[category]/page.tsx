@@ -1,23 +1,20 @@
 'use client'
-import React, { useState, useEffect, use } from 'react'
-import { menuData, MenuItem } from '@/data/menuData'
-import { Header, CategoryTabs, SubMenuTabs, MenuFilterBar, MenuDisplay, OfferBox } from '@/components'
-import Image from 'next/image'
+import { useParams } from 'next/navigation'
 import { useUser } from '@/contexts/UserContext'
 import { useRouter } from 'next/navigation'
-import { CgLogOut } from 'react-icons/cg';
+import React, { useEffect } from 'react'
+import { menuData } from '@/data/menuData'
+import { Header, CategoryTabs, SubMenuTabs, MenuFilterBar, MenuDisplay, OfferBox } from '@/components'
 import UseMenuFilters from '@/hooks/useMenuFilters'
 
-type PageProps = {
-    params: Promise<{
-        category: string
-    }>
-}
 
-function MenuPage({ params }: PageProps) {
+
+function MenuPage() {
     const { user, logout } = useUser()
     const router = useRouter()
-    const { category } = use(params)
+
+    const params = useParams()
+    const category = params.category as string
 
     const decodedCategory = decodeURI(category || '')
     const subMenus = menuData[decodedCategory] ? Object.keys(menuData[decodedCategory]) : []
@@ -62,6 +59,8 @@ function MenuPage({ params }: PageProps) {
                     </p>
                 )}
             </div>
+
+
             <MenuFilterBar
                 search={search}
                 setSearch={setSearch}

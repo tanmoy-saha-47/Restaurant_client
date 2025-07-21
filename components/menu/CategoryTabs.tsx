@@ -13,7 +13,6 @@ function CategoryTabs({ categories }: CategoryTabsProps) {
     const currentCategory = decodeURI(pathname.split('/').pop() || "")
 
 
-
     return (
         <div className='flex gap-3 px-4 py-2 bg-white border-b overflow-x-auto'>
 
