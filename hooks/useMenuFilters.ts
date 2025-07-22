@@ -10,7 +10,6 @@ export default function UseMenuFilters(
   const [search, setSearch] = useState("");
   const [showOnlyVeg, setShowOnlyVeg] = useState(false);
 
-  //Reset active tab if new category is selected
   useEffect(() => {
     if (
       subMenus.length > 0 &&
@@ -22,21 +21,11 @@ export default function UseMenuFilters(
     if (subMenus.length === 0 && activeTab !== "") {
       setActiveTab("");
     }
-  }, [decodedCategory, subMenus]);
+  }, [subMenus, activeTab]);
 
   const allItems: MenuItem[] = useMemo(() => {
     return (menuData[decodedCategory]?.[activeTab] || []) as MenuItem[];
   }, [decodedCategory, activeTab, menuData]);
-
-  const filteredItems = useMemo(() => {
-    return allItems.filter((item) => {
-      const matchesSearch = item.name
-        .toLowerCase()
-        .includes(search.toLowerCase());
-      const matchesVeg = showOnlyVeg ? item.isVeg : true;
-      return matchesSearch && matchesVeg;
-    });
-  }, [allItems, search, showOnlyVeg]);
 
   const handleRefresh = () => {
     setSearch("");
@@ -52,6 +41,5 @@ export default function UseMenuFilters(
     showOnlyVeg,
     setShowOnlyVeg,
     handleRefresh,
-    filteredItems,
   };
 }
