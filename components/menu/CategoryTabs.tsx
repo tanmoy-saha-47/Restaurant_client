@@ -5,9 +5,10 @@ import React from 'react'
 
 type CategoryTabsProps = {
     categories: string[];
+    categoryItemCount: Record<string, number>
 };
 
-function CategoryTabs({ categories }: CategoryTabsProps) {
+function CategoryTabs({ categories, categoryItemCount }: CategoryTabsProps) {
 
     const pathname = usePathname()
     const currentCategory = decodeURI(pathname.split('/').pop() || "")
@@ -20,10 +21,10 @@ function CategoryTabs({ categories }: CategoryTabsProps) {
                 <Link
                     key={category}
                     href={`/menu/${encodeURIComponent(category)}`}
-                    className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${category === currentCategory ? 'bg-blue-500 ' : 'bg-gray-200'
+                    className={`px-4 py-2 rounded-full text-md font-medium whitespace-nowrap hover:scale-110 duration-200 ease-in-out ${category === currentCategory ? 'text-lg font-black text-black' : ' text-gray-500'
                         }`}
                 >
-                    {category}
+                    {category} ({categoryItemCount[category] || 0})
                 </Link>
             ))}
         </div>
