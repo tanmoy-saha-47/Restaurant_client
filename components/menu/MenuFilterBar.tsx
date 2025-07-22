@@ -1,4 +1,7 @@
 import React from 'react'
+import { FaToggleOff } from "react-icons/fa6";
+import { FaToggleOn } from "react-icons/fa";
+
 
 type MenuFilterBarProps = {
     search: string
@@ -26,16 +29,15 @@ function MenuFilterBar({
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
-                <label className='flex items-center gap-2 cursor-pointer'>
+                <label className='flex items-center gap-3 cursor-pointer'>
                     <input
                         type="checkbox"
                         checked={showOnlyVeg}
                         onChange={() => setShowOnlyVeg(!showOnlyVeg)}
                         className='sr-only peer'
                     />
-                    <div className='w-11 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:bg-green-500 relative transition-all'>
-                        <div className='absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform peer-checked:translate-x-5'></div>
-                    </div>
+
+                    {!showOnlyVeg ? <FaToggleOff className='text-2xl' /> : <FaToggleOn className='text-2xl' />}
                     <span className='text-sm font-medium'> Veg Only</span>
                 </label>
 

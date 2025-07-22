@@ -63,7 +63,7 @@ function LoginPage() {
 
                 <button
                     type="submit"
-                    className="w-full bg-gray-400 text-white py-3 hover:bg-gray-700 font-semibold rounded-lg shadow-lg"
+                    className="w-full bg-gray-300  py-3 hover:bg-blue-500 active:bg-blue-700 active:scale-90 duration-200 ease-in-out font-semibold rounded-lg shadow-lg border-none"
                 >
                     Login
                 </button>
