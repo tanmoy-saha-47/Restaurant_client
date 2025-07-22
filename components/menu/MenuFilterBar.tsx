@@ -43,7 +43,7 @@ function MenuFilterBar({
 
                 <button
                     onClick={onRefresh}
-                    className='p-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none'
+                    className='p-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none active:scale-105 duration-200 ease-in'
                     aria-label='Refresh'
                 >
                     &#x21BB;
