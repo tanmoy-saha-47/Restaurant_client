@@ -24,50 +24,71 @@ function LoginPage() {
 
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-white">
-            <div className='relative w-full h-auto mt-4 px-4'>
-                <div className='relative w-full aspect-[3/2] md:aspect-[4/1] overflow-hidden rounded-lg shadow-md'>
-                    <Image
-                        src='/food.jpg'
-                        alt='Image'
-                        fill
-                        sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-                        priority
-                        className='object-cover object-center'
-                    />
+        <div className="min-h-screen relative">
+            {/* background image container */}
+            <div className="absolute inset-0">
+                <Image
+                    src='/login.jpg'
+                    alt="Background"
+                    fill
+                    className="object-cover"
+                    priority
+                />
+            </div>
+            {/* login form overlay */}
+            <div
+                className="relative z-10 min-h-screen flex flex-col justify-center items-center p-6">
+                {/* form container */}
+                <div
+                    className="bg-white bg-opacity-95 backdrop-blur-sm rounded-lg shadow-xl p-8 w-full max-w-md">
+                    {/* icon */}
+                    <div className="text-center mb-6">
+                        <div
+                            className="mx-auto w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center">
+                            <AiOutlineUser
+                                size={32} className="text-gray-600" />
+                        </div>
+                    </div>
+
+                    <h1 className="text-2xl font-bold text-center mb-2 text-gray-800">
+                        LOGIN</h1>
+                    <p className="text-center text-gray-600 mb-6">
+                        Enter your valid mobile number to continue
+                    </p>
+
+
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <div>
+                            <input
+                                type="tel"
+                                placeholder="Phone Number"
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent outline-none"
+                                required
+                            />
+                        </div>
+
+                        <div>
+                            <input
+                                type="text"
+                                placeholder="Name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent outline-none"
+                                required
+                            />
+                        </div>
+
+                        <button
+                            type="submit"
+                            className="w-full bg-orange-400 hover:bg-orange-500 text-white font-semibold py-3 px-4 rounded-lg transition duration-200 ease-in-out active:scale-95"
+                        >
+                            Login
+                        </button>
+                    </form>
                 </div>
             </div>
-            <AiOutlineUser className="text-gray-500 text-6xl mb-4" />
-
-            <h2 className="text-2xl font-bold mb-2">Login</h2>
-            <p className="text-gray-600 mb-6">Enter your valid mobile number</p>
-
-            <form
-                onSubmit={handleSubmit}
-                className="bg-white p-6 rounded-xl shadow-xl max-w-sm space-y-4"
-            >
-                <input
-                    type="tel"
-                    placeholder="Phone Number"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    className="border border-gray-200 p-3 w-full rounded-lg"
-                />
-                <input
-                    type="text"
-                    placeholder="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="border border-gray-200 p-3 w-full rounded-lg"
-                />
-
-                <button
-                    type="submit"
-                    className="w-full bg-gray-300  py-3 hover:bg-blue-500 active:bg-blue-700 active:scale-90 duration-200 ease-in-out font-semibold rounded-lg shadow-lg border-none"
-                >
-                    Login
-                </button>
-            </form>
         </div>
     )
 }
