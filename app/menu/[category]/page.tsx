@@ -8,6 +8,7 @@ import { Header, CategoryTabs, SubMenuTabs, MenuFilterBar, MenuDisplay, OfferBox
 import UseMenuFilters from '@/hooks/useMenuFilters'
 import getCategoryCounts from '@/utils/getCategoryCounts'
 import getSubMenuCounts from '@/utils/getSubMenuCounts'
+import ViewBillPage from '@/app/view-bill/page'
 import { useMenuData } from '@/hooks/useMenuData'
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { RiErrorWarningLine } from "react-icons/ri";
@@ -86,9 +87,11 @@ function MenuPage() {
 
 
             {user?.tableNumber && (
-                <p className='mt-2 text-black bg-gray-500 p-1 text-center  font-semibold'>
-                    🪑Table Number : {user.tableNumber}
-                </p>
+                <div className='mt-2 text-center'>
+                    <span className='bg-gray-500 text-white px-3 py-1 rounded font-semibold'>
+                        Table No: {user.tableNumber}
+                    </span>
+                </div>
             )}
 
 
@@ -99,6 +102,12 @@ function MenuPage() {
                 setShowOnlyVeg={setShowOnlyVeg}
                 onRefresh={handleRefresh}
             />
+            <button
+                onClick={() => router.push('/view-bill')}
+                className=' ml-5 text-sm font-bold text-red-500  active:scale-105 duration-200 ease-in-out mb-2'
+            >
+                View Bill
+            </button>
 
             <CategoryTabs categories={Object.keys(menuData)} categoryItemCount={categoryItemCount} />
 
