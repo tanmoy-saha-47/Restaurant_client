@@ -10,6 +10,7 @@ export const menuData: Record<string, Record<string, MenuItem[]>> = {
     Recommended: [
       { name: "Butter Garlic Naan", price: 99, isVeg: true },
       { name: "Butter Laccha Paratha", price: 89, isVeg: true },
+      { name: "Mutton Keema", price: 340, isVeg: false },
     ],
     "TODAY SPECIAL": [{ name: "Chicken Biriyani", price: 399, isVeg: false }],
     "BAR BITES": [{ name: "Chicken lasagna", price: 629, isVeg: false }],
