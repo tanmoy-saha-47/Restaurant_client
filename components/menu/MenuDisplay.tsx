@@ -11,7 +11,7 @@ type MenuDisplayProps = {
 function MenuDisplay({ activeTab, decodedCategory, filteredItems }: MenuDisplayProps) {
     return (
         <div className='p-4'>
-            <h2 className="text-xl font-bold mb-4 uppercase">{activeTab} {decodedCategory} </h2>
+            <h2 className="text-xl font-bold font-stretch-50% mb-4 uppercase">{activeTab} {decodedCategory} </h2>
 
             {filteredItems.length > 0 ? (
                 filteredItems.map((item, index) => (

@@ -1,6 +1,7 @@
 'use client'
 import { useParams } from 'next/navigation'
 import { useUser } from '@/contexts/UserContext'
+import { useCart } from '@/contexts/CartContext'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useMemo } from 'react'
 import { menuData } from '@/data/menuData'
@@ -12,12 +13,14 @@ import ViewBillPage from '@/app/view-bill/page'
 import { useMenuData } from '@/hooks/useMenuData'
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { RiErrorWarningLine } from "react-icons/ri";
+import { Span } from 'next/dist/trace'
 
 
 
 
 function MenuPage() {
-    const { user, logout } = useUser()
+    const { user, logout, } = useUser()
+    const { cartItems } = useCart()
     const router = useRouter()
 
     const params = useParams()
@@ -65,6 +68,7 @@ function MenuPage() {
     }, [menuItems, search, showOnlyVeg])
 
 
+    const totalCount = cartItems.reduce((acc, item) => acc + item.quantity, 0)
 
     const handleLogout = () => {
         logout()
@@ -87,27 +91,37 @@ function MenuPage() {
 
 
             {user?.tableNumber && (
-                <div className='mt-2 text-center'>
+                <div className='pt-2 text-center bg-yellow-200'>
                     <span className='bg-gray-500 text-white px-3 py-1 rounded font-semibold'>
                         Table No: {user.tableNumber}
                     </span>
                 </div>
             )}
 
+            <div className='bg-yellow-200'>
+                <MenuFilterBar
+                    search={search}
+                    setSearch={setSearch}
+                    showOnlyVeg={showOnlyVeg}
+                    setShowOnlyVeg={setShowOnlyVeg}
+                    onRefresh={handleRefresh}
+                />
 
-            <MenuFilterBar
-                search={search}
-                setSearch={setSearch}
-                showOnlyVeg={showOnlyVeg}
-                setShowOnlyVeg={setShowOnlyVeg}
-                onRefresh={handleRefresh}
-            />
-            <button
-                onClick={() => router.push('/view-bill')}
-                className=' ml-5 text-sm font-bold text-red-500  active:scale-105 duration-200 ease-in-out mb-2'
-            >
-                View Bill
-            </button>
+                <div className='flex gap-2 ml-3  '>
+                    <button
+                        onClick={() => router.push('/view-bill')}
+                        className=' ml-5 text-lg font-medium transform   hover:underline-offset-auto hover:scale-105 transition active:scale-105 duration-200 ease-in-out mb-2'
+                    >
+                        View Bill {totalCount > 0 && <span className='text-zinc-500 font-bold'> ({totalCount})</span>}
+                    </button>
+                    <button
+                        onClick={() => router.push('/orderHistory')}
+                        className=' ml-5 text-lg font-medium transform  hover:underline-offset-auto hover:scale-105 transition active:scale-105 duration-200 ease-in-out mb-2'
+                    >
+                        Order History
+                    </button>
+                </div>
+            </div>
 
             <CategoryTabs categories={Object.keys(menuData)} categoryItemCount={categoryItemCount} />
 

@@ -21,7 +21,7 @@ function CategoryTabs({ categories, categoryItemCount }: CategoryTabsProps) {
                 <Link
                     key={category}
                     href={`/menu/${encodeURIComponent(category)}`}
-                    className={`px-4 py-2 rounded-full text-md font-medium whitespace-nowrap hover:scale-110 duration-200 ease-in-out ${category === currentCategory ? 'text-lg font-black text-black' : ' text-gray-500'
+                    className={`px-4 py-2 rounded-full text-lg font-stretch-90% whitespace-nowrap hover:scale-110 active:scale-125 duration-200 ease-in-out ${category === currentCategory ? 'text-lg font-extrabold text-black' : 'font-medium text-gray-700 hover:text-black'
                         }`}
                 >
                     {category} ({categoryItemCount[category] || 0})

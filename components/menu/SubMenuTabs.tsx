@@ -20,7 +20,7 @@ function SubMenuTabs({
                 <button
                     key={sub}
                     onClick={() => setActiveTab(sub)}
-                    className={`px-3 py-1 text-md font-medium rounded-full whitespace-nowrap hover:scale-105 duration-200 ease-in-out ${activeTab === sub ? 'text-lg font-black text-black' : ' text-gray-500'
+                    className={`px-3 py-1  font-sans rounded-full whitespace-nowrap hover:scale-105 active:scale-110 duration-200 ease-in-out ${activeTab === sub ? 'text-lg font-extrabold text-black' : ' font-medium text-gray-700 hover:text-black'
                         }`}
                 >
                     {sub} ({subMenuItemCounts[sub] || 0})

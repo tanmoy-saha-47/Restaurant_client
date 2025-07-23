@@ -25,7 +25,7 @@ function MenuFilterBar({
                 <input
                     type="text"
                     placeholder='Start typing to search'
-                    className='flex-grow px-4 py-2 border border-gray-300 rounded'
+                    className='flex-grow px-4 py-2 border  rounded bg-white placeholder:text-gray-600 placeholder:font-stretch-75%'
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
@@ -37,8 +37,8 @@ function MenuFilterBar({
                         className='sr-only peer'
                     />
 
-                    {!showOnlyVeg ? <FaToggleOff className='text-2xl' /> : <FaToggleOn className='text-2xl' />}
-                    <span className='text-sm font-medium'> Veg Only</span>
+                    {!showOnlyVeg ? <FaToggleOff className='text-2xl ' /> : <FaToggleOn className='text-2xl' />}
+                    <span className='text-lg  font-medium transform hover:text-green-600 hover:scale-105  transition active:scale-110 duration-200 hover:underline'> Veg Only</span>
                 </label>
 
                 <button

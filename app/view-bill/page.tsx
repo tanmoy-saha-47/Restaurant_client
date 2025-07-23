@@ -2,6 +2,7 @@
 import React from 'react'
 import { useCart } from '@/contexts/CartContext'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 function ViewBillPage() {
     const { cartItems, clearCart } = useCart()
@@ -20,8 +21,17 @@ function ViewBillPage() {
     }
 
     return (
-        <div className='min-h-screen bg-gray-100 flex items-center justify-center p-4'>
-            <div className='bg-white shadow-lg rounded-lg p-6 max-w-2xl w-full'>
+        <div className='min-h-screen bg-gray-100 flex items-center justify-center p-4 relative'>
+            <div className='absolute inset-0'>
+                <Image
+                    src='/offer.jpg'
+                    alt='Background'
+                    fill
+                    objectFit='cover'
+                    className='overflow-hidden'
+                />
+            </div>
+            <div className='bg-white shadow-lg rounded-lg p-6 max-w-2xl w-full relative z-10'>
                 <h1 className='text-3xl font-extrabold mb-6 text-center text-gray-800'>Order Summary</h1>
 
                 {cartItems.length === 0 ? (
