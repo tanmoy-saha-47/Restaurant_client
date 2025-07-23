@@ -5,3 +5,4 @@ export { default as MenuItemCard } from "./menu/MenuItemCard";
 export { default as MenuFilterBar } from "./menu/MenuFilterBar";
 export { default as MenuDisplay } from "./menu/MenuDisplay";
 export { default as OfferBox } from "./common/OfferBox";
+export { default as Footer } from "./layouts/Footer";

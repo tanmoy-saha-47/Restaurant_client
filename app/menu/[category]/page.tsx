@@ -5,7 +5,7 @@ import { useCart } from '@/contexts/CartContext'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useMemo } from 'react'
 import { menuData } from '@/data/menuData'
-import { Header, CategoryTabs, SubMenuTabs, MenuFilterBar, MenuDisplay, OfferBox } from '@/components'
+import { Header, CategoryTabs, SubMenuTabs, MenuFilterBar, MenuDisplay, OfferBox, Footer } from '@/components'
 import UseMenuFilters from '@/hooks/useMenuFilters'
 import getCategoryCounts from '@/utils/getCategoryCounts'
 import getSubMenuCounts from '@/utils/getSubMenuCounts'
@@ -139,6 +139,7 @@ function MenuPage() {
                 decodedCategory={decodedCategory}
                 filteredItems={filteredItems}
             />
+            <Footer />
         </div>
     )
 }
