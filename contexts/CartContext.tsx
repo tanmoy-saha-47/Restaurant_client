@@ -13,6 +13,7 @@ type CartContexttype = {
     increment: (item: MenuItem) => void
     decrement: (item: MenuItem) => void
     clearCart: () => void
+    setItemQuantity: (itemToUpdate: MenuItem, quantity: number) => void
 }
 
 const CartContext = createContext<CartContexttype | undefined>(undefined)
@@ -47,12 +48,16 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         )
     }
 
+    const setItemQuantity = (itemToUpdate: MenuItem, newQuantity: number) => {
+        setCartItems(prev => prev.map(i => i.name === itemToUpdate.name ? { ...i, quantity: newQuantity } : i))
+    }
+
     const clearCart = () => {
         setCartItems([])
     }
 
     return (
-        <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, increment, decrement, clearCart }}>
+        <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, increment, decrement, setItemQuantity, clearCart }}>
             {children}
         </CartContext.Provider>
     )

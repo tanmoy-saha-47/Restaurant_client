@@ -11,6 +11,7 @@ type UserContextType = {
     user: User | null
     login: (userData: User) => void
     logout: () => void
+    tableNumber: number | null
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined)
@@ -18,9 +19,11 @@ const UserContext = createContext<UserContextType | undefined>(undefined)
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<User | null>(null)
+    const [tableNumber, setTableNumber] = useState<number | null>(null)
 
     const login = (userData: User) => {
         setUser(userData)
+        setTableNumber(userData.tableNumber)
     }
 
     const logout = () => {
@@ -28,7 +31,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     }
 
     return (
-        <UserContext.Provider value={{ user, login, logout }}>
+        <UserContext.Provider value={{ user, login, logout, tableNumber }}>
             {children}
         </UserContext.Provider>
     )

@@ -7,7 +7,7 @@ type DataSource = "Static" | "api";
 export function useMenuData(
   category: string,
   subCategory: string,
-  source: DataSource = "Static"
+  source: DataSource = "api"
 ): {
   items: MenuItem[];
   loading: boolean;
@@ -26,8 +26,10 @@ export function useMenuData(
           const menuItems = menuData?.[decodedCategory]?.[subCategory] ?? [];
           setItems(menuItems);
         } else if (source === "api") {
+          const encodedCategory = encodeURIComponent(category);
+          const encodedSubCategory = encodeURIComponent(subCategory);
           const res = await fetch(
-            `/api/menu?category=${category}&subCategory=${subCategory}`
+            `/api/menu?category=${encodedCategory}&subCategory=${encodedSubCategory}`
           );
           if (!res.ok) throw new Error(`ERROR ${res.status}`);
           const json = await res.json();

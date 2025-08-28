@@ -1,31 +1,55 @@
-import React from 'react'
-import MenuItemCard from './MenuItemCard'
-import { MenuItem } from '@/data/menuData'
+import React, { useState } from 'react'
+import MenuItemCard from '@/components/menu/MenuItemCard'
+import { MenuItem, } from '@/data/menuData'
 
 type MenuDisplayProps = {
-    activeTab: string
-    decodedCategory: string
-    filteredItems: MenuItem[]
+    menuData: Record<string, Record<string, MenuItem[]>>;
+    search: string
+    onSelectItem: (item: MenuItem | null) => void
 }
 
-function MenuDisplay({ activeTab, decodedCategory, filteredItems }: MenuDisplayProps) {
+function MenuDisplay({ menuData, search, onSelectItem }: MenuDisplayProps) {
     return (
-        <div className='p-4'>
-            <h2 className="text-xl font-bold font-stretch-50% mb-4 uppercase">{activeTab} {decodedCategory} </h2>
+        <div className='p-4 pb-24'>
+            {Object.entries(menuData).map(([category, subMenus]) => {
+                const categoryId = category.replace(/\s+/g, '-').toLowerCase();
 
-            {filteredItems.length > 0 ? (
-                filteredItems.map((item, index) => (
-                    <MenuItemCard
-                        key={index}
-                        item={item}
-                    />
-                ))
-            ) : (
-                <p className='text-center text-gray-500'>
-                    No items match your search.
-                </p>
-            )}
+                const visibleSubMenus = Object.entries(subMenus)
+                    .map(([subMenu, items]) => {
+                        const visibleItems = items
+                            .filter(item => item.available)
+                            .filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
+                        return { subMenu, visibleItems }
+                    })
+                    .filter(sm => sm.visibleItems.length > 0)
 
+                if (visibleSubMenus.length === 0) {
+                    return null
+                }
+
+                return (
+                    <div key={category} id={categoryId}>
+                        <h2 className='text-2xl font-bold mt-6 mb-4'> {category} </h2>
+
+                        {visibleSubMenus.map(({ subMenu, visibleItems }) => (
+                            <div key={subMenu}>
+                                <h3 className='text-xl font-semibold my-3'> {subMenu} </h3>
+                                {visibleItems.map((item) => (
+                                    <MenuItemCard
+                                        key={item.name}
+                                        item={item}
+                                        onSelect={onSelectItem}
+                                    />
+                                ))}
+                            </div>
+                        ))}
+
+
+
+
+                    </div>
+                )
+            })}
         </div>
     )
 }

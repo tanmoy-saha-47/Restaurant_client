@@ -15,11 +15,20 @@ function LoginPage() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
 
+        const existingUserDataString = localStorage.getItem('userData')
+        const existingUserData = existingUserDataString ? JSON.parse(existingUserDataString) : {}
+
+        const updatedUserData = {
+            ...existingUserData,
+            name: name,
+            phone: phone,
+        }
+
         if (!name || !phone) return;
 
-        login({ name, phone, tableNumber: 0 })
+        login(updatedUserData)
 
-        router.push('/select-table')
+        router.push('/otp')
     }
 
 
